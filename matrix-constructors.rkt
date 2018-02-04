@@ -13,8 +13,7 @@
 (define/contract (build-matrix r [c r] [f (const 0)])
   ((exact-positive-integer?)
    (exact-positive-integer?
-    (exact-nonnegative-integer?
-      exact-nonnegative-integer? . -> . matrix-val?)) . ->* . matrix?)
+    (natural? natural? . -> . matrix-val?)) . ->* . matrix?)
   (build-list r
               (λ (x)
                 (build-list c

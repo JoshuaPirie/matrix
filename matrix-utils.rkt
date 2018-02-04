@@ -42,11 +42,11 @@
   (matrix-num-rows m))
 
 (define/contract (matrix-row m n)
-  (matrix? exact-nonnegative-integer? . -> . matrix-row?)
+  (matrix? natural? . -> . matrix-row?)
   (list-ref m n))
 
 (define/contract (matrix-col m n)
-  (matrix? exact-nonnegative-integer? . -> . matrix-col?)
+  (matrix? natural? . -> . matrix-col?)
   (build-list (matrix-num-rows m)
               (λ (y) (matrix-val m n y))))
 
@@ -56,5 +56,9 @@
               (λ (y) (matrix-val m y y))))
 
 (define/contract (matrix-val m x y)
-  (matrix? exact-nonnegative-integer? exact-nonnegative-integer? . -> . matrix-val?)
+  (matrix? natural? natural? . -> . matrix-val?)
   (list-ref (list-ref m y) x))
+
+(define/contract (matrix-set m x y v)
+  (matrix? natural? natural? matrix-val? . -> . matrix?)
+  (list-set m y (list-set (matrix-row m y) x v)))
